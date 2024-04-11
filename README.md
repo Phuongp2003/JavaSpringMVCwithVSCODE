@@ -1,16 +1,46 @@
+# Java Web Project with Tomcat and Maven(for build)
+
+- This is a simple project to create a web project with java, tomcat and maven.
+- Required: jdk1.8(for tomcat), java version >= 9(for rsp/Community Server Connectors), maven, tomcat, ms sql server with database name "Personel" and table "User".
+
 # HOW TO USE
 
 1. Download Extension Pack for Java, Community Server Connectors in vscode market place.
 2. Download maven.
-3. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server.
-4. launch task "maven: clean install" by ctrl + shift p and choosing "Task: run task" to build a classes path.
-5. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
+3. Download [jdk1.8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html) (required).
+4. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server, recommend tomcat 8.5.
+5. launch task "maven: clean install" by ctrl + shift p and choosing "Task: run task" to build a classes path.
+6. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
+   - Choose server -> your server
+   - Add params -> yes -> your project name (it will be your slug to view the project on the browser)
+   - Project name -> empty
 
-- Choose server -> your server
-- Add params -> yes -> your project name (it will be your slug to view the project on the browser)
-- Project name -> empty
+7. Open your browser and go to http://localhost:8080/<your_project_name>
+8. Setup hot reload: 
+   1. At explorer, find tag "JAVA PROJECTS" -> click on "..." -> choose "Configure Classpath " -> edit output path to "src/main/webapp/WEB-INF/classes" -> Save -> Apply.
+   2. On settings, find "Java: Auto Build" -> check it.
+   3. On settings, find "java.debug.settings.hotCodeReplace" -> change it to "auto".
+   4. On settings, find "java.configuration.updateBuildConfiguration" -> change it to "automatic"
+9. Setup database: check src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
 
-5. Open your browser and go to http://localhost:8080/<your_project_name>
+# Requirements configuration
+
+## 1. Maven
+
+- Install sqlldbc4: Terminal -> Run task -> maven: install sqlldbc4
+  manual:
+
+```
+mvn install:install-file -Dfile="setup/sqljdbc4.jar" -DgroupId="com.microsoft.sqlserver" -DartifactId=sqljdbc4 -Dversion="4.0" -Dpackaging=jar
+```
+
+## 2. Tomcat
+
+- Setup vm.install.path
+  - With tomcat from disk: when install, i will show a window like this, just edit in field "vm.install.path" to your jdk path.
+    ![alt text](setup/image.png)
+  - With tomcat download from server: right click on your server -> Edit Server...
+    It will open a file json, find "vm.install.path" and change it to your jdk path.
 
 # NOTE
 
@@ -55,3 +85,36 @@
 |
 |___pom.xml
 ```
+
+## 5. Bug with Community Server Connectors
+
+- If you have a bug with Community Server Connectors, it may cause by your java version. You can change your java version to 9 or higher to fix this bug. Check JAVA_HOME in your system environment variables if it's installed.
+
+## 6. Bug with Tomcat
+
+- Server log maybe look like this:
+
+```
+java.lang.ExceptionInInitializerError: Exception java.lang.ExceptionInInitializerError [in thread "localhost-startStop-1"]
+	org.springframework.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:166)
+	org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)
+	org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:216)
+	org.springframework.cglib.core.KeyFactory$Generator.create(KeyFactory.java:144)
+	org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:116)
+	org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:108)
+	org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:104)
+	org.springframework.cglib.proxy.Enhancer.<clinit>(Enhancer.java:69)
+	org.springframework.aop.framework.CglibAopProxy.createEnhancer(CglibAopProxy.java:234)
+	org.springframework.aop.framework.CglibAopProxy.getProxy(CglibAopProxy.java:177)
+	org.springframework.aop.framework.ProxyFactory.getProxy(ProxyFactory.java:111)
+	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.createProxy(AbstractAutoProxyCreator.java:490)
+	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.wrapIfNecessary(AbstractAutoProxyCreator.java:375)
+	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization(AbstractAutoProxyCreator.java:335)
+```
+
+- This bug may cause by your jdk version setup in your server. You can change your jdk version to 1.8 to fix this bug. Check [this](#2-tomcat) to know how to change your jdk version.
+
+## 7. Run/Debug issue
+
+- Server status must be "Started(or Debugging), Synchronized" to run/debug the project.
+- In debugmode, you can hot reload the project by changing the code and save it, then click the hotload on debug bar.

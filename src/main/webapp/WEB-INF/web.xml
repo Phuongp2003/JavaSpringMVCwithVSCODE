@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-	
+	<display-name>LAB2_N21DCCN167_PHAMBUINAMPHUONG</display-name>
 	<!-- DispatcherServlet -->
-	<display-name>template for INT1434-3</display-name>
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>WEB-INF/configs/*.xml</param-value>
+			<param-value>/WEB-INF/configs/*.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
-	<!-- ServletMapping -->
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-	
-	<!-- Enable UTF8 on all .jsp files -->
-	<jsp-config>
-		<jsp-property-group>
-			<url-pattern>*.jsp</url-pattern>
-			<page-encoding>UTF-8</page-encoding>
-		</jsp-property-group>
-	</jsp-config>
 	
 	<!-- CharacterEncodingFilter -->
 	<filter>
