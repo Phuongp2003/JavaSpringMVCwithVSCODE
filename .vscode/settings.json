@@ -1,0 +1,20 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.debug.settings.hotCodeReplace": "auto",
+    "java.autobuild.enabled": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.referencedLibraries": [
+        "src\\main\\webapp\\WEB-INF\\lib\\*"
+    ],
+    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-18.0.2.1", //must be higher or equal to 17
+    "java.project.sourcePaths": [
+        "src\\main\\java"
+    ],
+    "java.project.outputPath": "src\\main\\webapp\\WEB-INF\\classes",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "C:\\Program Files (x86)\\Java\\jdk-1.8" //must be lower or equal to jdk1.8, dont use Eclipse's jre
+        }
+    ]
+}
