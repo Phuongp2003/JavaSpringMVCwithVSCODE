@@ -74,8 +74,6 @@ note: At the second time open project, it will warn you about "Run time need JDK
 |               |_web.xml
 |               |_index.jsp
 |               |_...
-|
-|___pom.xml
 ```
 
 ## 5. Bug with Community Server Connectors
