@@ -11,15 +11,14 @@ a{
 
 .favorite-types .card:hover {
     transform: translate(0px, -5px);
-
     transition: all 0.5s;
     box-shadow: 2.5px 5px 7.5px 5px lightgrey;
-    
-    /* transition: all 0.5s ease-in-out; */
 }
 
 .favorite-types .card {
-    margin-bottom: 1.5rem;
+    min-height: 4rem;
+    margin-bottom: 1.3rem;
+    background-color:#EEEEEE;
 }
 
 .favorite-types .title {
@@ -27,49 +26,19 @@ a{
 }
 .top-sell .card {
     display: inline-flex;
+    margin-bottom:1.5rem;
+    width: 18.6rem;
+    height: 36rem;
 }
 
 .top-sell .card:hover {
+    transition: all 0.5s;
     box-shadow: 2.5px 2.5px 2.5px 2.5px lightgrey;
-}
-
-.top-sell .card {
-    margin-bottom:1.5rem ;
 }
 
 .top-sell .title {
     margin-bottom: 1rem;
 }
-
-.footer{
-    margin-top: 5rem;
-    position: relative;
-}
-.footer-bg{
-    background-color:#09182e;
-    z-index: 1;
-    position: absolute;
-    height: 100%;
-} 
-.footer .navbar-nav{
-    z-index: 2;
-}
-.footer .nav-link{
-    color: white;
-}
-.footer a{
-    color: white;
-}
-.footer-copyright{
-    padding-top: 1rem;
-    z-index: 2;
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    color: white;
-    background-color: gray;
-}
-
 
 .shop {
     margin-top: 2rem;
@@ -97,8 +66,6 @@ a{
 .collection-product .card:hover {
     transform: translate(0px, -5px);
 
-    transition: all 0.5s;
+    transition: all 0.5s ease-in-out;
     box-shadow: 2.5px 5px 7.5px 5px lightgrey;
-    
-    /* transition: all 0.5s ease-in-out; */
 }

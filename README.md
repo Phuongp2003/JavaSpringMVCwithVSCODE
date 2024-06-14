@@ -1,65 +1,60 @@
-# Java Web Project with Tomcat and Maven(for build)
+# Java Spring MVC Project with Tomcat 
 
-- This is a simple project to create a web project with java, tomcat.
-- Required: jdk1.8(for tomcat), java version >= 9(for rsp/Community Server Connectors), maven, tomcat, ms sql server with database name "Personel" and table "User".
+- Mẫu JavaMVC chạy bằng server Tomcat
+- Yêu cầu: jdk1.8(for tomcat), java phiên bản >= 9(dùng cho cho rsp/Community Server Connectors), tomcat, mssql server với database TESTDB(mẫu ở trong thư mục, tên db.sql).
 
-# HOW TO USE
-note: At the second time open project, it will warn you about "Run time need JDK 17+" like this, just skip it: 
+# Cách dùng
+Note: Ở lần chạy thứ 2 trở đi, có thể có bảng cảnh báo "Run time need JDK 17+" như sau, chỉ cần bỏ qua nó:
 ![alt text](setup/warn.png)
 
-1. Download Extension Pack for Java, Community Server Connectors in vscode market place.
-2. Download [jdk1.8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html) (required).
-3. In Explorer (Ctrl+Shift+E), look at tag "Server", add your tomcat server (use server on disk) or download a new server, recommend tomcat 8.5.
-4. In the first time open project, you should build the project by run task build (ctrl + shift + b) or your java build tool.
-5. Right click on the project (src/main/webapp) and choose "Run on server" to deploy the project on the server.
-   - Choose server -> your server
-   - Add params -> yes -> your project name (it will be your slug to view the project on the browser)
-   - Project name -> empty
+1. Tải Extension Pack for Java, Community Server Connectors trong VSCode Extensions.
+2. Tải [jdk1.8](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html) (cần thiết, bỏ qua nếu có bản 1.8 rồi).
+3. Ở phần Explorer (Ctrl+Shift+E), tag "Server", thêm tomcat server (use server on disk) hoặc tải bản tomcat mới, khuyến nghị tomcat 8.5.
+4. Lần đầu mở project, cần build lại toàn bộ dự án bằng build task (ctrl + shift + b) hoặc trình xây dựng của bạn(maven, ...). Sau đó, trừ khi có lượng thay đổi lớn hoặc tương tự, bạn chỉ cần save file là nó sẽ tự comp thành class.
+5. Chuột phải vào thư mục dự án (src/main/webapp) và chọn "Run on server" để deploy sản phẩm.
+   - Chọn server: server của bạn, hoặc tạo mới nếu cần
+   - Thêm param: thêm để có tên của sản phẩm, mặc định là "webapp"
+   - Project name: để trống
 
-6. Open your browser and go to http://localhost:8080/<your_project_name>
-7. Setup hot reload: 
-   1. At explorer, find tag "JAVA PROJECTS" -> click on "..." -> choose "Configure Classpath " -> edit output path to "src/main/webapp/WEB-INF/classes" -> Save -> Apply.
-   2. On settings, find "Java: Auto Build" -> check it.
-   3. On settings, find "java.debug.settings.hotCodeReplace" -> change it to "auto".
-   4. On settings, find "java.configuration.updateBuildConfiguration" -> change it to "automatic"
-8. Setup database: check src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml
+6. Mở trình duyệt và truy cập http://localhost:8080/<your_project_name>
+7. Hot reload(đã cài sẵn, nếu k hoạt động hãy cài thủ công như dưới): 
+   1. Ở explorer, tìm tag "JAVA PROJECTS" -> click on "..." -> chọn "Configure Classpath " -> sửa output path thành "src/main/webapp/WEB-INF/classes" -> Save -> Apply.
+   2. Trong cài đặt, tìm "Java: Auto Build" -> check.
+   3. Trong cài đặt, tìm "java.debug.settings.hotCodeReplace" -> chỉnh thành "auto".
+   4. Trong cài đặt, tìm "java.configuration.updateBuildConfiguration" -> chỉnh thành "automatic"
+8. Setup database: xem src/main/webapp/WEB-INF/configs/spring-config-hibernate.xml.example (sao chép và đổi tên, xóa đuôi example là được)
 
-# Requirements configuration
+# Cài đặt cần thiết
 
 ## 1. Tomcat
 
 - Setup vm.install.path
-  - With tomcat from disk: when install, i will show a window like this, just edit in field "vm.install.path" to your jdk path.
+  - Với tomcat của bạn: khi cài đặt, nó sẽ hiện thông báo, chỉnh sửa field "vm.install.path" đến thư mục jdk của bạn(1.8).
     ![alt text](setup/image.png)
-  - With tomcat download from server: right click on your server -> Edit Server...
-    It will open a file json, find "vm.install.path" and change it to your jdk path.
+  - Với tomcat tải về từ server: chuột phải vào server -> Edit Server...
+    Nó sẽ mở 1 file json, tìm "vm.install.path" và sửa đến thư mục jdk của bạn(1.8).
 
+## 2. Email
+- Kiểm tra file spring-config-gmail.xml
 # NOTE
 
-## 1. Change output port
+## 1. Đổi cổng ra (port)
 
-- On tag Server, right click on your server and choose "Server Actions..."
-- Choose "Edit Configuration File"
-- Choose conf/server.xml
-- Find "Connector port=" and change the port to your desired port.
-- Restart/start your server.
+- Ở tag Server, chuột phải vào server và chọn "Server Actions..."
+- Chọn "Edit Configuration File"
+- Chọn conf/server.xml
+- Tìm "Connector port=" và đổi đến port bạn muốn.
+- Restart/start server.
 
-## 2. Simple way to deploy with your project name
+## 2. Cách deploy đơn giản nhất
 
-- When adding a project to the server, you keep param empty, your slug will be http://localhost:8080/webapp
-- If you want to change the slug, you can change the webapp folder name to your desired name.
+- Khi cài server, nếu không thêm param hay port, đường dẫn đến sản phẩm sẽ là: http://localhost:8080/webapp
 
-## 3. Builded folder of maven (target)
+## 3. Đổi tên, dường dẫn thư mục webapp
 
-- You can run the project by right click on the .war and choose "Run on server" without building the project by yourself, but it's doesn't have hot reload.
-
-- You can delete this folder, it will not affect your project.
-
-## 4. Change webapp folder name / path
-
-- You need to change the path of classes too
-- Go to pom.xml, find "maven-compiler-plugin" and change the path of outputDirectory to your desired path.
-- This project files tree:
+- Cần đổi cả thư mục classes
+- Sửa ở .vscode/.settings.
+- Cây thư mục dự án:
 
 ```
 |___src
@@ -74,15 +69,16 @@ note: At the second time open project, it will warn you about "Run time need JDK
 |               |_web.xml
 |               |_index.jsp
 |               |_...
+
 ```
 
-## 5. Bug with Community Server Connectors
+## 5. Lỗi Community Server Connectors
 
-- If you have a bug with Community Server Connectors, it may cause by your java version. You can change your java version to 9 or higher to fix this bug. Check JAVA_HOME in your system environment variables if it's installed.
+- Có thể do java version. Cần cài bản java >= 9. Kiểm tra JAVA_HOME ở system environment variables nếu đã cài.
 
-## 6. Bug with Tomcat
+## 6. Bug với Tomcat
 
-- Server log maybe look like this:
+- Server log :
 
 ```
 java.lang.ExceptionInInitializerError: Exception java.lang.ExceptionInInitializerError [in thread "localhost-startStop-1"]
@@ -102,14 +98,15 @@ java.lang.ExceptionInInitializerError: Exception java.lang.ExceptionInInitialize
 	org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization(AbstractAutoProxyCreator.java:335)
 ```
 
-- This bug may cause by your jdk version setup in your server. You can change your jdk version to 1.8 to fix this bug. Check [this](#2-tomcat) to know how to change your jdk version.
+- Lỗi này là do phiên bản java dùng cho server. Cần đổi phiên bản java thành 1.8. Check phần **##2. Tomcat** để biết thêm.
 
-## 7. Run/Debug issue
+## 7. Run/Debug
 
-- Server status must be "Started(or Debugging), Synchronized" to run/debug the project.
-- In debugmode, you can hot reload the project by changing the code and save it, then click the hotload on debug bar.
+- Server cần ở trạng thái "Started(hoặc Debugging), Synchronized" để chạy/debug.
+- Ở debugmode, có thể hot reload tự động, tuy nhiên, nếu có chỉnh sửa ở Bean hoặc phần khởi tạo dữ liệu, cần khởi động lại server, hoặc tắt server hẳn rồi bật lại.
 
 ## 8. Java issues
-- I got some issues with java bean:
+- Lỗi ở java bean:
 ![alt text](setup/bean.png)
-- Just try to clear cache of your IDE and java project, then rebuild the project.
+
+- Clear cache và cầu nguyện ╰(*°▽°*)╯.
